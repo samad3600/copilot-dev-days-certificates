@@ -20,7 +20,7 @@ async function init() {
       if (config.site_title) {
         document.title = config.site_title;
       }
-      renderCertificateView(config, attendee);
+      renderCertificateView(config, attendee, id);
       showView('certificate-view');
     } else {
       // No id: show search view
@@ -95,7 +95,7 @@ function setImageGraceful(id, src) {
  * Populate all certificate HTML slots from config and attendee data.
  * Requires all cert-* IDs to exist in index.html (created by plan 02-01).
  */
-function renderCertificateView(config, attendee) {
+function renderCertificateView(config, attendee, id) {
   // Org header
   var orgNameEl = document.getElementById('cert-org-name');
   if (orgNameEl) orgNameEl.textContent = config.org_name || '';
@@ -164,7 +164,7 @@ function renderCertificateView(config, attendee) {
 
   // QR code: encode full certificate URL for one-tap verification
   if (config.show_qr !== false) {
-    generateQR(config);
+    generateQR(config, id);
   } else {
     var qrEl = document.getElementById('cert-qr');
     if (qrEl) qrEl.parentNode.style.display = 'none';
@@ -176,11 +176,12 @@ function renderCertificateView(config, attendee) {
  * Uses qrcode.js (window.QRCode) loaded from CDN.
  * Encoded URL = config.org_website if set, otherwise falls back to window.location.href.
  */
-function generateQR(config) {
+function generateQR(config, id) {
   var container = document.getElementById('cert-qr');
   if (!container || typeof QRCode === 'undefined') return;
   container.innerHTML = '';
-  var qrUrl = (config.org_website && config.org_website.trim()) ? config.org_website.trim() : window.location.href;
+  var base = (config.org_website && config.org_website.trim()) ? config.org_website.trim() : window.location.origin + window.location.pathname;
+  var qrUrl = id ? (base + (base.indexOf('?') === -1 ? '?' : '&') + 'id=' + encodeURIComponent(id)) : base;
   new QRCode(container, {
     text: qrUrl,
     width: 68,
