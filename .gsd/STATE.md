@@ -2,16 +2,16 @@
 
 **Project:** Workshop Certificate App — Template Edition
 **Milestone:** 1.0 — Template MVP
-**Status:** Planning complete — ready to execute
+**Status:** In Progress — Phase 01 executing
 
 ## Current Phase
-Phase 01: Scaffold & Config System — Not Started
+Phase 01: Scaffold & Config System — In Progress (Plan 01-01 complete)
 
 ## Phase Status
 
 | # | Phase | Status | Plans |
 |---|-------|--------|-------|
-| 01 | Scaffold & Config System | Not Started | 5 plans |
+| 01 | Scaffold & Config System | In Progress | 5 plans (1/5 complete) |
 | 02 | Certificate Rendering | Not Started | 4 plans |
 | 03 | Interactive Features | Not Started | 3 plans |
 | 04 | Search & SPA Routing | Not Started | 3 plans |
@@ -31,6 +31,10 @@ Phase 01: Scaffold & Config System — Not Started
 - Clean URL paths (e.g. `/john-doe`) explicitly out of scope — conflicts with OG scraper requirement
 - v2 deferral: CI validator, certificate gallery, multiple workshops per person, opaque IDs, sitemap
 
+- SRI hashes fetched live from cdnjs API at execution time (qrcode.min.js, html2pdf.bundle.min.js)
+- loading-view has no hidden class — visible by default for app init
+- Error message hardcoded in HTML — branding config fetch may itself have failed
+
 ### Todos
 (none yet)
 
@@ -38,4 +42,4 @@ Phase 01: Scaffold & Config System — Not Started
 (none)
 
 ## Last Updated
-April 11, 2026 — Roadmap created
+April 11, 2026 — Plan 01-01 repo scaffold complete
